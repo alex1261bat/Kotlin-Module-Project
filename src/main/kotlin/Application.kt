@@ -50,10 +50,9 @@ class Application {
 
         if (archives.isNotEmpty()) {
             println("Введите номер архива из списка")
+            archives.forEachIndexed { index, archive ->
+                menuList.add("${index + 1}. ${archive.title}") }
 
-            for (i in archives.indices) {
-                menuList.add("${i + 1}. ${archives[i].title}")
-            }
         } else {
             println("Еще нет созданных архивов")
             return
@@ -67,12 +66,12 @@ class Application {
     }
 
     private fun getArchiveByTitle() {
-        var archive = Archive("example", mutableListOf())
+        var archive = Archive("example")
 
         if (archives.isNotEmpty()) {
             println("Введите название архива")
             scanner.nextLine()
-            val title = scanner.nextLine()
+            val title: String = scanner.nextLine()
 
             for (element in archives) {
                 if (element.title.lowercase() == title.lowercase()) {
@@ -94,10 +93,8 @@ class Application {
         val menuList = mutableListOf<String>()
         if (archive.notes.isNotEmpty()) {
             println("Введите номер заметки из списка")
-
-            for (i in archive.notes.indices) {
-                menuList.add("${i + 1}. ${archive.notes[i].title}")
-            }
+            archive.notes.forEachIndexed { index, element ->
+                menuList.add("${index + 1}. ${element.title}") }
         } else {
             println("Еще нет созданных заметок")
             return
@@ -115,7 +112,7 @@ class Application {
         if (archive.notes.isNotEmpty()) {
             println("Введите название заметки")
             scanner.nextLine()
-            val title = scanner.nextLine()
+            val title: String = scanner.nextLine()
 
             for (element in archive.notes) {
                 if (element.title.lowercase() == title.lowercase()) {
